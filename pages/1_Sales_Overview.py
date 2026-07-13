@@ -78,7 +78,7 @@ if selected_category != "All":
 
 total_sales = filtered_df["Sales"].sum()
 total_orders = filtered_df["Order ID"].nunique()
-average_order = filtered_df["Sales"].mean()
+average_order = total_sales / total_orders
 
 col1, col2, col3 = st.columns(3)
 
