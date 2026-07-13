@@ -27,7 +27,7 @@ st.markdown("---")
 
 st.subheader("Product Demand Clusters")
 
-chart_path = "charts/product_clusters.png"
+chart_path = "Charts/product_clusters.png"
 
 if os.path.exists(chart_path):
 
