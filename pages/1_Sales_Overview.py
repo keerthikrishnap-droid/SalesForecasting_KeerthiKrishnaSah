@@ -176,7 +176,15 @@ region_sales = (
     .reset_index()
 )
 
-st.dataframe(region_sales)
+fig, ax = plt.subplots(figsize=(6,4))
+
+ax.bar(
+    region_sales["Region"],
+    region_sales["Sales"]
+)
+
+st.pyplot(fig)
+plt.close(fig)
 #
 
 # with st.expander("Sales by Region", expanded=True):
