@@ -1,4 +1,9 @@
 
+import streamlit as st
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Sales by Region
 
 st.subheader("Sales by Region")
 
