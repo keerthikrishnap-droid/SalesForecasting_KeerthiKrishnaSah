@@ -1,6 +1,8 @@
 
 
 
+
+
 # Sales Overview Dashboard
 
 
@@ -156,72 +158,53 @@ left, right = st.columns(2)
 
 with left:
     st.pyplot(fig_year)
+    plt.close(fig_year)
 
 with right:
     st.pyplot(fig_month)
+    plt.close(fig_month)
 
 st.markdown("---")
 
 
 # Sales by Region
-#
-# Sales by Region
 
-st.subheader("Sales by Region")
 
-region_sales = (
-    filtered_df
-    .groupby("Region")["Sales"]
-    .sum()
-    .reset_index()
-)
+with st.expander("Sales by Region", expanded=True):
 
-fig, ax = plt.subplots(figsize=(6,4))
+    region_sales = (
+        filtered_df
+        .groupby("Region")["Sales"]
+        .sum()
+        .reset_index()
+    )
 
-ax.bar(
-    region_sales["Region"],
-    region_sales["Sales"]
-)
+    region_view = st.radio(
+        "View",
+        ["Bar Chart", "Table"],
+        horizontal=True,
+        key="region"
+    )
 
-st.pyplot(fig)
-plt.close(fig)
-#
+    if region_view == "Bar Chart":
 
-# with st.expander("Sales by Region", expanded=True):
+        fig, ax = plt.subplots(figsize=(6,4))
 
-#     region_sales = (
-#         filtered_df
-#         .groupby("Region")["Sales"]
-#         .sum()
-#         .reset_index()
-#     )
+        ax.bar(
+            region_sales["Region"],
+            region_sales["Sales"]
+        )
 
-#     region_view = st.radio(
-#         "View",
-#         ["Bar Chart", "Table"],
-#         horizontal=True,
-#         key="region"
-#     )
+        ax.set_title("Sales by Region")
 
-#     if region_view == "Bar Chart":
+        st.pyplot(fig)
 
-#         fig, ax = plt.subplots(figsize=(6,4))
+    else:
 
-#         ax.bar(
-#             region_sales["Region"],
-#             region_sales["Sales"]
-#         )
-
-#         ax.set_title("Sales by Region")
-
-#         st.pyplot(fig)
-
-#     else:
-
-#         st.dataframe(
-#             region_sales,
-#             use_container_width=True
-#         )
+        st.dataframe(
+            region_sales,
+            use_container_width=True
+        )
 
 
 # Sales by Category
@@ -257,6 +240,7 @@ with st.expander("Sales by Category", expanded=True):
         plt.xticks(rotation=20)
 
         st.pyplot(fig)
+        plt.close(fig)
 
     else:
 
